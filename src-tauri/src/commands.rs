@@ -1,9 +1,14 @@
 use crate::core::{
+    accessibility,
     models::task::{TaskProgress, TaskStatus},
-    mouse,
+    mouse, scheduler,
     state::AppState,
-    scheduler,
 };
+
+#[tauri::command]
+pub fn is_accessibility_permission_granted() -> bool {
+    accessibility::is_accessibility_enabled()
+}
 
 #[tauri::command]
 pub fn start_clicking_task(
@@ -41,4 +46,3 @@ pub fn get_task_status(state: tauri::State<AppState>) -> TaskProgress {
 pub async fn toggle_idle_move_job(app_handle: tauri::AppHandle) -> Result<(), String> {
     scheduler::toggle_idle_move_job(app_handle)
 }
-

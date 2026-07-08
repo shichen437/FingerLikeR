@@ -3,6 +3,15 @@
         <h1 class="text-2xl font-bold">FingerLike R</h1>
         <div class="w-full max-w-lg mt-6">
             <Card>
+                <CardHeader v-if="!isAccessibilityGranted">
+                    <CardTitle class="text-destructive"
+                        >需要辅助功能权限</CardTitle
+                    >
+                    <CardDescription>
+                        请在 "系统设置" > "隐私与安全" > "辅助功能" 中为
+                        FingerLike R 开启权限, 然后重启应用。
+                    </CardDescription>
+                </CardHeader>
                 <CardContent class="pt-6">
                     <Form
                         :validation-schema="formSchema"
@@ -27,7 +36,10 @@
                                     </FormControl>
                                     <Button
                                         type="submit"
-                                        :disabled="taskState.status !== 'Idle'"
+                                        :disabled="
+                                            taskState.status !== 'Idle' ||
+                                            !isAccessibilityGranted
+                                        "
                                     >
                                         开始任务
                                     </Button>
@@ -41,7 +53,10 @@
                                         size="sm"
                                         type="button"
                                         @click="setFieldValue('amount', 500)"
-                                        :disabled="taskState.status !== 'Idle'"
+                                        :disabled="
+                                            taskState.status !== 'Idle' ||
+                                            !isAccessibilityGranted
+                                        "
                                     >
                                         500
                                     </Button>
@@ -50,7 +65,10 @@
                                         size="sm"
                                         type="button"
                                         @click="setFieldValue('amount', 1000)"
-                                        :disabled="taskState.status !== 'Idle'"
+                                        :disabled="
+                                            taskState.status !== 'Idle' ||
+                                            !isAccessibilityGranted
+                                        "
                                     >
                                         1000
                                     </Button>
@@ -59,7 +77,10 @@
                                         size="sm"
                                         type="button"
                                         @click="setFieldValue('amount', 3000)"
-                                        :disabled="taskState.status !== 'Idle'"
+                                        :disabled="
+                                            taskState.status !== 'Idle' ||
+                                            !isAccessibilityGranted
+                                        "
                                     >
                                         3000
                                     </Button>
@@ -73,7 +94,8 @@
                 class="text-center text-sm text-muted-foreground mt-4"
                 v-if="taskState.status === 'Countdown'"
             >
-                当前鼠标位置: X: {{ mousePosition.x }}, Y: {{ mousePosition.y }}
+                当前鼠标位置: X: {{ mousePosition.x }}, Y:
+                {{ mousePosition.y }}
             </div>
             <TaskProgress v-show="taskState.status !== 'Idle'" />
         </div>
@@ -87,7 +109,13 @@ import { listen } from "@tauri-apps/api/event";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
     Form,
@@ -104,6 +132,8 @@ import {
     TaskProgress as TaskProgressType,
 } from "@/store/task";
 import { getStoreValue } from "@/store/store";
+
+const isAccessibilityGranted = ref(false);
 
 const formSchema = toTypedSchema(
     z.object({
@@ -180,6 +210,9 @@ async function onSubmit(values: any) {
 }
 
 onMounted(async () => {
+    isAccessibilityGranted.value = await invoke(
+        "is_accessibility_permission_granted",
+    );
     unlisten = await listen<TaskProgressType>("task-progress", (event) => {
         setTaskState(event.payload);
     });

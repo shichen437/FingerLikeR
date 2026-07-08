@@ -49,7 +49,8 @@ pub fn run() {
             commands::start_clicking_task,
             commands::get_mouse_location,
             commands::get_task_status,
-            commands::toggle_idle_move_job
+            commands::toggle_idle_move_job,
+            commands::is_accessibility_permission_granted
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
