@@ -1,0 +1,10 @@
+[tools]
+rust = "stable"
+node = "24"
+
+[tasks.dev]
+description = "For development env"
+run = ["npm run tauri dev"]
+
+[tasks.build]
+run = ["npm run tauri build -- --bundles dmg"]
