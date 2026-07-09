@@ -1,0 +1,11 @@
+{
+  "notes": "项目初始化",
+  "platforms": {
+    "darwin-aarch64`": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSY01WY3FKQ2dwc3B5M0lvUGg0T3RIWHN6U3VHaURYL0VieFY2d0MvQ3lBc3NaZCtKRUVkdlJ6a0dFUzBOb0cxNTFHWFpLRDZyRHoxSDl4Y1JKbndDMThuVjRnblR5b1FBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgzNTk3MzMxCWZpbGU6RmluZ2VyTGlrZSBSLmFwcC50YXIuZ3oKcURYQlpRSVVxNmcxcFh4RllnWEoxREZzdlFqY2E0Q1hqZi8vUkttRUxSZEVXTXl2d0pUOHhWL0dmVkw5clo0WlZYcERmSC9aOTRuMC9mRm9mbHd0RFE9PQo=",
+      "url": "https://github.com/shichen437/FingerLikeR/releases/latest/download/latest.json/FingerLike R.app.tar.gz"
+    }
+  },
+  "pub_date": "2026-07-09T11:48:49Z",
+  "version": "0.1.0"
+}
