@@ -6,11 +6,19 @@ import {
     CardDescription,
 } from "@/components/ui/card";
 import { ExternalLink } from "@lucide/vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { getVersion } from "@tauri-apps/api/app";
+import { getLatestVersion } from "@/lib/updater";
 
-const appVersion = ref("0.1.0");
+const appVersion = ref("Fetching...");
+const latestVersion = ref("Fetching...");
 const projectGithubUrl = "https://github.com/shichen437/FingerLikeR";
 const authorEmail = "shichen437@126.com";
+
+onMounted(async () => {
+    appVersion.value = await getVersion();
+    latestVersion.value = await getLatestVersion();
+});
 </script>
 
 <template>
@@ -34,7 +42,7 @@ const authorEmail = "shichen437@126.com";
                     <span>{{ appVersion }}</span>
 
                     <span>最新版本:</span>
-                    <span>{{ appVersion }}</span>
+                    <span>{{ latestVersion }}</span>
                     <span>源码地址:</span>
                     <a
                         :href="projectGithubUrl"

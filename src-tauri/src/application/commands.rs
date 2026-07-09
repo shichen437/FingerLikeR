@@ -1,8 +1,7 @@
-use crate::core::{
-    accessibility,
-    models::task::{TaskProgress, TaskStatus},
-    mouse, scheduler,
-    state::AppState,
+use crate::{
+    application::state::AppState,
+    domain::models::task::{TaskProgress, TaskStatus},
+    infrastructure::{accessibility, mouse, scheduler},
 };
 
 #[tauri::command]

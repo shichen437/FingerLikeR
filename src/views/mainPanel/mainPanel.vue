@@ -133,7 +133,7 @@ import {
 } from "@/store/task";
 import { getStoreValue } from "@/store/store";
 
-const isAccessibilityGranted = ref(false);
+const isAccessibilityGranted = ref(true);
 
 const formSchema = toTypedSchema(
     z.object({

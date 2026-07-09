@@ -1,4 +1,4 @@
-use crate::core::models::task::{TaskProgress, TaskStatus};
+use crate::domain::models::task::{TaskProgress, TaskStatus};
 use std::sync::{Arc, Mutex};
 use tauri::{Emitter, WebviewWindow};
 
@@ -22,13 +22,7 @@ impl AppState {
         window.emit("task-progress", progress.clone()).unwrap();
     }
 
-    pub fn set_progress(
-        &self,
-        window: &WebviewWindow,
-        status: TaskStatus,
-        prog: u32,
-        total: u32,
-    ) {
+    pub fn set_progress(&self, window: &WebviewWindow, status: TaskStatus, prog: u32, total: u32) {
         let mut progress = self.task_progress.lock().unwrap();
         progress.status = status;
         progress.progress = prog;

@@ -1,6 +1,6 @@
-use crate::core::{
-    models::{click_params::ClickParams, task::TaskStatus},
-    state::AppState,
+use crate::{
+    application::state::AppState,
+    domain::models::{click_params::ClickParams, task::TaskStatus},
 };
 use enigo::{Button, Coordinate, Direction, Enigo, Mouse, Settings};
 use rand::Rng;
