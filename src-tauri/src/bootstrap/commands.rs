@@ -1,7 +1,9 @@
 use crate::{
-    application::state::AppState,
-    domain::models::task::{TaskProgress, TaskStatus},
-    infrastructure::{accessibility, mouse, scheduler},
+    core::mouse::model::click_task::{TaskProgress, TaskStatus},
+    core::mouse::mouse_click,
+    infra::accessibility,
+    module::scheduler::scheduler,
+    shared::app_state::AppState,
 };
 
 #[tauri::command]
@@ -20,12 +22,12 @@ pub fn start_clicking_task(
         return;
     }
     state.start_task();
-    mouse::start_clicking(app, window, count, state.inner().clone());
+    mouse_click::start_clicking(app, window, count, state.inner().clone());
 }
 
 #[tauri::command]
 pub fn get_mouse_location() -> (i32, i32) {
-    mouse::get_location()
+    mouse_click::get_location()
 }
 
 #[tauri::command]
@@ -42,6 +44,6 @@ pub fn get_task_status(state: tauri::State<AppState>) -> TaskProgress {
 }
 
 #[tauri::command]
-pub async fn toggle_idle_move_job(app_handle: tauri::AppHandle) -> Result<(), String> {
-    scheduler::toggle_idle_move_job(app_handle)
+pub async fn toggle_idle_move_job() -> Result<(), String> {
+    scheduler::toggle_idle_move_job()
 }

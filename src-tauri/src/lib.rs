@@ -1,58 +1,46 @@
-mod application;
-mod domain;
-mod infrastructure;
-use tauri_plugin_global_shortcut::{Code, GlobalShortcutExt, Modifiers, Shortcut, ShortcutState};
+mod bootstrap;
+mod core;
+mod infra;
+mod module;
+mod shared;
 
-use crate::application::state::AppState;
-use tauri::Manager;
+use crate::shared::app_state::AppState;
+use tauri::async_runtime;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let app_state = AppState::new();
     tauri::Builder::default()
-        .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(app_state)
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(
             tauri_plugin_global_shortcut::Builder::new()
-                .with_handler(|app_handle, shortcut, event| {
-                    let cmd_shift_j =
-                        Shortcut::new(Some(Modifiers::META | Modifiers::SHIFT), Code::KeyJ);
-
-                    if shortcut == &cmd_shift_j {
-                        if let ShortcutState::Pressed = event.state() {
-                            if let Some(main_window) = app_handle.get_webview_window("main") {
-                                let app_state = app_handle.state::<AppState>();
-                                application::commands::cancel_task(main_window, app_state);
-                            }
-                        }
-                    }
-                })
+                .with_handler(module::shortcut::ShortcutHandler::create_handler())
                 .build(),
         )
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
-            infrastructure::store::init_store(app.handle())?;
-
-            if let Err(e) = infrastructure::scheduler::toggle_idle_move_job(app.handle().clone()) {
-                eprintln!("Failed to toggle idle move job on startup: {}", e);
-            }
+            shared::app_handle::set_app_handle(app.handle().clone());
+            infra::store::init_store()?;
+            module::trayicon::trayicon::init_tray_menu()?;
+            async_runtime::spawn(async move {
+                let _ = module::scheduler::scheduler::toggle_idle_move_job();
+            });
 
             #[cfg(desktop)]
             {
-                let cmd_shift_j =
-                    Shortcut::new(Some(Modifiers::META | Modifiers::SHIFT), Code::KeyJ);
-                app.global_shortcut().register(cmd_shift_j)?;
+                module::shortcut::ShortcutRegistry::register_shortcuts()?;
             }
 
             Ok(())
         })
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            application::commands::start_clicking_task,
-            application::commands::get_mouse_location,
-            application::commands::get_task_status,
-            application::commands::toggle_idle_move_job,
-            application::commands::is_accessibility_permission_granted
+            bootstrap::commands::start_clicking_task,
+            bootstrap::commands::get_mouse_location,
+            bootstrap::commands::get_task_status,
+            bootstrap::commands::toggle_idle_move_job,
+            bootstrap::commands::is_accessibility_permission_granted
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

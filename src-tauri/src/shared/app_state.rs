@@ -1,4 +1,4 @@
-use crate::domain::models::task::{TaskProgress, TaskStatus};
+use crate::core::mouse::model::click_task::{TaskProgress, TaskStatus};
 use std::sync::{Arc, Mutex};
 use tauri::{Emitter, WebviewWindow};
 
