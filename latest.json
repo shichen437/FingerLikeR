@@ -1,11 +1,15 @@
 {
-  "notes": "项目初始化",
+  "notes": "新增系统托盘",
   "platforms": {
-    "darwin-aarch64`": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSY01WY3FKQ2dwc3B5M0lvUGg0T3RIWHN6U3VHaURYL0VieFY2d0MvQ3lBc3NaZCtKRUVkdlJ6a0dFUzBOb0cxNTFHWFpLRDZyRHoxSDl4Y1JKbndDMThuVjRnblR5b1FBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzgzNTk3MzMxCWZpbGU6RmluZ2VyTGlrZSBSLmFwcC50YXIuZ3oKcURYQlpRSVVxNmcxcFh4RllnWEoxREZzdlFqY2E0Q1hqZi8vUkttRUxSZEVXTXl2d0pUOHhWL0dmVkw5clo0WlZYcERmSC9aOTRuMC9mRm9mbHd0RFE9PQo=",
-      "url": "https://github.com/shichen437/FingerLikeR/releases/latest/download/latest.json/FingerLike R.app.tar.gz"
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSY01WY3FKQ2dwc2hxb0oxUkEyOHliTjB6SFpQNnpTalpGOVVXUUtTZFVGNlNUbFdIb0pYVUdLUXE5TVkvejVoY2szVjJpOUZzWDI0bmh0My9WWk5CajFnN3M2eUd5cWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0MTEzNzc4CWZpbGU6RmluZ2VyTGlrZSBSLmFwcC50YXIuZ3oKRGs4blFVdWJtNWU4STJ1ZUQyZTdXa0gzQ0RhQ2JpcE9lYXJ5UURIZXdiMVFlUU9WT3VPL0ZYYVIvdFJVU3NuUU9pK1Ywc000ellURDQ3cmtKaEgvQ0E9PQo=",
+      "url": "https://github.com/shichen437/FingerLikeR/releases/download/v0.1.1/FingerLike R.app.tar.gz"
+    },
+    "darwin-aarch64-app": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSY01WY3FKQ2dwc2hxb0oxUkEyOHliTjB6SFpQNnpTalpGOVVXUUtTZFVGNlNUbFdIb0pYVUdLUXE5TVkvejVoY2szVjJpOUZzWDI0bmh0My9WWk5CajFnN3M2eUd5cWdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg0MTEzNzc4CWZpbGU6RmluZ2VyTGlrZSBSLmFwcC50YXIuZ3oKRGs4blFVdWJtNWU4STJ1ZUQyZTdXa0gzQ0RhQ2JpcE9lYXJ5UURIZXdiMVFlUU9WT3VPL0ZYYVIvdFJVU3NuUU9pK1Ywc000ellURDQ3cmtKaEgvQ0E9PQo=",
+      "url": "https://github.com/shichen437/FingerLikeR/releases/download/v0.1.1/FingerLike R.app.tar.gz"
     }
   },
-  "pub_date": "2026-07-09T11:48:49Z",
-  "version": "0.1.0"
+  "pub_date": "2026-07-15T11:14:11Z",
+  "version": "0.1.1"
 }
